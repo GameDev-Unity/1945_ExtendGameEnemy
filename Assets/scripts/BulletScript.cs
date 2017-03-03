@@ -6,6 +6,7 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     public float speed;
+	public PlayerScript owner;
 
 	// Use this for initialization
 	void Start () {

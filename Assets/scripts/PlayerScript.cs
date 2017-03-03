@@ -7,17 +7,18 @@ public class PlayerScript : MonoBehaviour
 
     public float Speed;
     private SoundEngine _soundEngine;
-    //private Animator _animator;
+    private Animator _animator;
     public string x_axis;
     public string y_axis;
     public string fire_axis;
     public float fireRate;
     private float nextFire = 0.0F;
+	public int score = 0;
 
     // Use this for initialization
     void Start ()
     {
-        //_animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
         _soundEngine = GameObject.FindGameObjectWithTag("SoundEngine").GetComponent<SoundEngine>();
     }
 
@@ -30,6 +31,7 @@ public class PlayerScript : MonoBehaviour
             nextFire = Time.time + fireRate;
             //Debug.Log("Shoot!");
 			GameObject bullet = (GameObject)Instantiate(Resources.Load("SmallBullet"));
+			bullet.GetComponent<BulletScript> ().owner = this;
 			// offset to create bullet in front of plane
 			bullet.transform.position = transform.position + Vector3.right * 0.25f;
 
@@ -46,8 +48,8 @@ public class PlayerScript : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             _soundEngine.Explosion.Play();
-            Destroy(gameObject);
-
+			_animator.SetBool ("exploded", true);
+            Destroy(gameObject, 1);
         }
     }
 
