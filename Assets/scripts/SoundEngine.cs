@@ -18,7 +18,7 @@ public class SoundEngine : MonoBehaviour
         Shot = audioSources[1];
         Explosion = audioSources[2];
 
-        //Song.Play();
+        Song.Play();
     }
 
     // Update is called once per frame
