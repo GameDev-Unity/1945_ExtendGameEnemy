@@ -5,7 +5,7 @@ using Random = System.Random;
 
 public class EnemySpawnerStrategy : MonoBehaviour {
 
-    private Random random = new Random();
+    protected Random random = new Random();
     private float spawnPercentage = 5;
     
     // Use this for initialization
