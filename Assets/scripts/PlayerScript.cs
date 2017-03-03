@@ -7,7 +7,7 @@ public class PlayerScript : MonoBehaviour
 
     public float Speed;
     private SoundEngine _soundEngine;
-    //private Animator _animator;
+    private Animator _animator;
     public string x_axis;
     public string y_axis;
     public string fire_axis;
@@ -17,7 +17,7 @@ public class PlayerScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        //_animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
         _soundEngine = GameObject.FindGameObjectWithTag("SoundEngine").GetComponent<SoundEngine>();
     }
 
@@ -46,8 +46,8 @@ public class PlayerScript : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             _soundEngine.Explosion.Play();
-            Destroy(gameObject);
-
+			_animator.SetBool ("exploded", true);
+            Destroy(gameObject, 1);
         }
     }
 
