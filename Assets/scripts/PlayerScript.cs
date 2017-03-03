@@ -13,6 +13,7 @@ public class PlayerScript : MonoBehaviour
     public string fire_axis;
     public float fireRate;
     private float nextFire = 0.0F;
+	public int score = 0;
 
     // Use this for initialization
     void Start ()
@@ -30,6 +31,7 @@ public class PlayerScript : MonoBehaviour
             nextFire = Time.time + fireRate;
             //Debug.Log("Shoot!");
 			GameObject bullet = (GameObject)Instantiate(Resources.Load("SmallBullet"));
+			bullet.GetComponent<BulletScript> ().owner = this;
 			// offset to create bullet in front of plane
 			bullet.transform.position = transform.position + Vector3.right * 0.25f;
 

@@ -21,6 +21,7 @@ public class EnemyScript : MonoBehaviour
         Debug.Log("Colliosion on Enemy detected");
         if (coll.gameObject.tag == "Bullet")
         {
+			coll.gameObject.GetComponent<BulletScript> ().owner.score++;
             _soundEngine.Explosion.Play();
             Destroy(gameObject);
         }
