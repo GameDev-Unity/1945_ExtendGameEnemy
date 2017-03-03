@@ -13,7 +13,7 @@ public class EnemyScript : MonoBehaviour
 	
 	// Update is called once per frame
 	public virtual void Update () {
-        transform.position += new Vector3(-speed * Time.deltaTime, 0, 0);
+		transform.Translate (Vector2.left * Time.deltaTime);
     }
 
     public virtual void OnTriggerEnter2D(Collider2D coll)
@@ -21,6 +21,7 @@ public class EnemyScript : MonoBehaviour
         Debug.Log("Colliosion on Enemy detected");
         if (coll.gameObject.tag == "Bullet")
         {
+			coll.gameObject.GetComponent<BulletScript> ().owner.score++;
             _soundEngine.Explosion.Play();
             Destroy(gameObject);
         }

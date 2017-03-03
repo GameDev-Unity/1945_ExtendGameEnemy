@@ -6,6 +6,7 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     public float speed;
+	public PlayerScript owner;
 
 	// Use this for initialization
 	void Start () {
@@ -14,7 +15,7 @@ public class BulletScript : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
+		transform.Translate (Vector2.right * speed * Time.deltaTime);
 
         // destroy bullets outside screen
 	    if (transform.position.x > 12)

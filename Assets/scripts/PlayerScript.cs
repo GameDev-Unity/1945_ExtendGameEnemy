@@ -7,36 +7,33 @@ public class PlayerScript : MonoBehaviour
 
     public float Speed;
     private SoundEngine _soundEngine;
-    //private Animator _animator;
+    private Animator _animator;
     public string x_axis;
     public string y_axis;
     public string fire_axis;
     public float fireRate;
     private float nextFire = 0.0F;
+	public int score = 0;
 
     // Use this for initialization
     void Start ()
     {
-        //_animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
         _soundEngine = GameObject.FindGameObjectWithTag("SoundEngine").GetComponent<SoundEngine>();
     }
 
     // Update is called once per frame
 	void Update () {
-        transform.position += new Vector3(
-           Input.GetAxis(x_axis) * Time.deltaTime * Speed,
-           Input.GetAxis(y_axis) * Time.deltaTime * Speed,
-           0
-          );
+		transform.Translate (new Vector2 (Input.GetAxis (x_axis) * Time.deltaTime * Speed, Input.GetAxis (y_axis) * Time.deltaTime * Speed));
 
         if (Input.GetAxisRaw(fire_axis) != 0 && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
             //Debug.Log("Shoot!");
-            GameObject bullet = (GameObject)Instantiate(Resources.Load("SmallBullet"));
-            bullet.transform.position = transform.position;
-            // offset to create bullet in front of plane
-            bullet.transform.position += new Vector3(0.25f, 0, 0);
+			GameObject bullet = (GameObject)Instantiate(Resources.Load("SmallBullet"));
+			bullet.GetComponent<BulletScript> ().owner = this;
+			// offset to create bullet in front of plane
+			bullet.transform.position = transform.position + Vector3.right * 0.25f;
 
             _soundEngine.Shot.Play();
         }
@@ -51,8 +48,8 @@ public class PlayerScript : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             _soundEngine.Explosion.Play();
-            Destroy(gameObject);
-
+			_animator.SetBool ("exploded", true);
+            Destroy(gameObject, 1);
         }
     }
 
