@@ -23,20 +23,14 @@ public class PlayerScript : MonoBehaviour
 
     // Update is called once per frame
 	void Update () {
-        transform.position += new Vector3(
-           Input.GetAxis(x_axis) * Time.deltaTime * Speed,
-           Input.GetAxis(y_axis) * Time.deltaTime * Speed,
-           0
-          );
-
+        transform.Translate(new Vector2(Input.GetAxis(x_axis) * Time.deltaTime * Speed, Input.GetAxis(y_axis) * Time.deltaTime * Speed));
         if (Input.GetAxisRaw(fire_axis) != 0 && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
             //Debug.Log("Shoot!");
             GameObject bullet = (GameObject)Instantiate(Resources.Load("SmallBullet"));
-            bullet.transform.position = transform.position;
+            bullet.transform.position = transform.position + new Vector3(0.25f, 0, 0);
             // offset to create bullet in front of plane
-            bullet.transform.position += new Vector3(0.25f, 0, 0);
 
             _soundEngine.Shot.Play();
         }

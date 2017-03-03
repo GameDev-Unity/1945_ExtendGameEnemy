@@ -23,5 +23,10 @@ public class EnemySpawnerStrategy : MonoBehaviour {
             randomEnemy.transform.position = new Vector3(10,0,0);
 
         }
+	    if (random.Next(1000) < 25)
+	    {
+            GameObject randomEnemy = (GameObject)Instantiate(Resources.Load("DangerousIsland"));
+            randomEnemy.transform.position = new Vector3(10, 2, 0);
+        }
     }
 }

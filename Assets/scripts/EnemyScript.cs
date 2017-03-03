@@ -8,7 +8,7 @@ public class EnemyScript : MonoBehaviour
     private SoundEngine _soundEngine;
     // Use this for initialization
     public virtual void  Start () {
-        _soundEngine = GameObject.FindGameObjectWithTag("SoundEngine").GetComponent<SoundEngine>();
+        SetSoundEngine(GameObject.FindGameObjectWithTag("SoundEngine").GetComponent<SoundEngine>());
     }
 	
 	// Update is called once per frame
@@ -28,5 +28,9 @@ public class EnemyScript : MonoBehaviour
 
     }
 
+    public virtual void SetSoundEngine(SoundEngine val)
+    {
+        _soundEngine = val;
+    }
    
 }
