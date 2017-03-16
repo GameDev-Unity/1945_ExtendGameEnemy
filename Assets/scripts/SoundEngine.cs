@@ -8,7 +8,7 @@ public class SoundEngine : MonoBehaviour
     public AudioSource Shot { get; private set; }
     public AudioSource Song { get; private set; }
 
-    public
+   
 
     // Use this for initialization
     void Start()
@@ -18,7 +18,7 @@ public class SoundEngine : MonoBehaviour
         Shot = audioSources[1];
         Explosion = audioSources[2];
 
-        //Song.Play();
+        Song.Play();
     }
 
     // Update is called once per frame
