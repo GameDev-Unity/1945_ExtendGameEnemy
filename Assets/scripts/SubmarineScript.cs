@@ -21,14 +21,14 @@ public class SubmarineScript : EnemyScript
 
 
     // Use this for initialization
-    public override void Start()
+    protected override void Start()
     {
         _emergeRotation = rand.Next(1, 360);
         transform.Rotate(0, 0, _emergeRotation);
     }
 
     // Update is called once per frame
-    public override void Update()
+    protected override void Update()
     {
         _soundEngine = GameObject.FindGameObjectWithTag("SoundEngine").GetComponent<SoundEngine>();
         transform.position += new Vector3(-_parralaxSpeed * Time.deltaTime, 0, 0);
@@ -41,7 +41,7 @@ public class SubmarineScript : EnemyScript
         }
     }
 
-    public override void OnTriggerEnter2D(Collider2D coll)
+    protected override void OnTriggerEnter2D(Collider2D coll)
     {
         
 
