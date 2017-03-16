@@ -7,21 +7,22 @@ public class EnemyScript : MonoBehaviour
     public float speed;
     private SoundEngine _soundEngine;
     // Use this for initialization
-    public virtual void  Start () {
+
+
+    protected virtual void Start () {
         _soundEngine = GameObject.FindGameObjectWithTag("SoundEngine").GetComponent<SoundEngine>();
     }
 	
 	// Update is called once per frame
-	public virtual void Update () {
-		transform.Translate (Vector2.left * Time.deltaTime);
+	protected virtual void Update () {
+        transform.position += new Vector3(-speed * Time.deltaTime, 0, 0);
     }
 
-    public virtual void OnTriggerEnter2D(Collider2D coll)
+    protected virtual void OnTriggerEnter2D(Collider2D coll)
     {
         Debug.Log("Colliosion on Enemy detected");
         if (coll.gameObject.tag == "Bullet")
         {
-			coll.gameObject.GetComponent<BulletScript> ().owner.score++;
             _soundEngine.Explosion.Play();
             Destroy(gameObject);
         }

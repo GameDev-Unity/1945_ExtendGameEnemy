@@ -12,14 +12,14 @@ public class EnemySpawner : MonoBehaviour
 	void Start ()
 	{
 	    strategy = gameObject.AddComponent<EnemySpawnerStrategy>();
-	    islands = gameObject.AddComponent<IslandStrategy>();
-		strategy.StartStrategy();
-        islands.StartStrategy();
+	  //  islands = gameObject.AddComponent<IslandStrategy>();
+		//strategy.StartStrategy();
+       // islands.StartStrategy();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		strategy.UpdateStrategy();
-        islands.UpdateStrategy();
+        //islands.UpdateStrategy();
 	}
 }

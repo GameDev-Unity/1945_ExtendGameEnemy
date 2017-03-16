@@ -6,7 +6,7 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     public float speed;
-	public PlayerScript owner;
+    public Direction direction = Direction.Right;
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +15,15 @@ public class BulletScript : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Translate (Vector2.right * speed * Time.deltaTime);
+	    if (direction == Direction.Left)
+	    {
+            transform.position += new Vector3(-speed * Time.deltaTime, 0, 0);
+        }
+        
+        else
+        {
+            transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
+        }
 
         // destroy bullets outside screen
 	    if (transform.position.x > 12)
@@ -30,5 +38,7 @@ public class BulletScript : MonoBehaviour
         Debug.Log("Colliosion on bullet detected");
         Destroy(gameObject);
     }
+
+    public enum Direction { Left, Right};
 
 }

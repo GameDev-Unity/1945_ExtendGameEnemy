@@ -31,7 +31,7 @@ public class PlayerScript : MonoBehaviour
             nextFire = Time.time + fireRate;
             //Debug.Log("Shoot!");
 			GameObject bullet = (GameObject)Instantiate(Resources.Load("SmallBullet"));
-			bullet.GetComponent<BulletScript> ().owner = this;
+			
 			// offset to create bullet in front of plane
 			bullet.transform.position = transform.position + Vector3.right * 0.25f;
 

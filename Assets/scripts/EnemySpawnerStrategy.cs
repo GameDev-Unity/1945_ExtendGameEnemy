@@ -1,13 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
 
-public class EnemySpawnerStrategy : MonoBehaviour {
+public class EnemySpawnerStrategy : MonoBehaviour
+{
 
-    protected Random random = new Random();
-    private float spawnPercentage = 5;
-    
+    public float minHeight = -4;
+    public float maxHeight =  4;
+
+    private Random random = new Random();
+    private float spawnPercentage = 2;
+    private float spawnPercentageShootingEnemy = 0.5f;
+
+
     // Use this for initialization
     public virtual void StartStrategy () {
 		
@@ -15,12 +20,21 @@ public class EnemySpawnerStrategy : MonoBehaviour {
 	
 	// Update is called once per frame
 	public virtual void UpdateStrategy () {
-        Debug.Log("strategy fucked");
-        if (random.Next(100) < spawnPercentage)
+        if (Random.value*100 < spawnPercentage)
         {
             //instansiate enemy
             GameObject randomEnemy = (GameObject)Instantiate(Resources.Load("Enemy"));
-            randomEnemy.transform.position = new Vector3(10,0,0);
+            float spawn_y = Random.Range(minHeight, maxHeight);
+            randomEnemy.transform.position = new Vector3(10, spawn_y, 0);
+
+        }
+
+        if (Random.value * 100 < spawnPercentageShootingEnemy)
+        {
+            //instansiate enemy
+            GameObject randomEnemy = (GameObject)Instantiate(Resources.Load("ShootingEnemy"));
+            float spawn_y = Random.Range(minHeight, maxHeight);
+            randomEnemy.transform.position = new Vector3(10, spawn_y, 0);
 
         }
     }

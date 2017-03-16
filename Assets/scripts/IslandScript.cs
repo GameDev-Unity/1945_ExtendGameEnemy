@@ -5,13 +5,13 @@ using UnityEngine;
 public class IslandScript : EnemyScript {
 
 	// Use this for initialization
-    public override void Start()
+    protected override void Start()
     {
         speed = 1.5f;
         base.Start();
     }
 
-    public override void Update()
+    protected override void Update()
     {
         transform.Translate(Vector2.left * Time.deltaTime * 0.9f);
     }
