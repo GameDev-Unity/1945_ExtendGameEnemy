@@ -37,7 +37,7 @@ public class ShootingEnemyScript : EnemyScript
                     bullet.GetComponent<BulletScript>().direction = BulletScript.Direction.Left;
                     bullet.transform.position = transform.position;
                     // offset to create bullet in front of plane
-                    bullet.transform.position += new Vector3(-0.25f, 0, 0);
+                    bullet.transform.position += new Vector3(-0.35f, 0, 0);
                 }
             }
 

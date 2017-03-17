@@ -10,26 +10,47 @@ public class FollowPath : MonoBehaviour
     public GameObject PathFollower;
     public float speed = 0.1f;
     private GameObject nxtWayPoint;
- 
+
+    private float distanceToWaypoint;
+    private Vector3 startingPosition;
     private int wayPointNumber = 0;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         PathFollower.transform.position = waypoints[wayPointNumber].transform.position;
         wayPointNumber++;
-	    nxtWayPoint = waypoints[wayPointNumber];
+        nxtWayPoint = waypoints[wayPointNumber];
+        startingPosition = PathFollower.transform.position;
+        distanceToWaypoint = Vector3.Distance(PathFollower.transform.position, nxtWayPoint.transform.position);
+        //Vector3 direction = nxtWayPoint.transform.position - PathFollower.transform.position;
     }
 
     // Update is called once per frame
-	void Update ()
-	{
-	    
-        // fly towards waypoint until waypoint is reached
+    void Update()
+    {
+        if (PathFollower != null)
+        {
+            // move toward nxtWayPoint
+            if (Vector3.Distance(PathFollower.transform.position, startingPosition) < distanceToWaypoint)
+            {
+                float distanceToMove = Time.deltaTime * speed;
+                PathFollower.transform.position = Vector3.MoveTowards(PathFollower.transform.position, nxtWayPoint.transform.position, distanceToMove);
+            }
+            //change waypoint
+            else
+            {
+                wayPointNumber++;
+                nxtWayPoint = waypoints[wayPointNumber];
+                startingPosition = PathFollower.transform.position;
+                distanceToWaypoint = Vector3.Distance(PathFollower.transform.position, nxtWayPoint.transform.position);
+            }
+        }
 
-        // switch to next waypoint when reached
-       
-	}
 
-    
+
+
+    }
+
+
 }
